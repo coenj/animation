@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Coen Janssen animatie</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            position: fixed;
+        }
+    </style>
+</head>
+
+
+<body>
+
+</body>
+<script>
+    for (var i = 0; i < 10; i++) {
+        document.getElementsByTagName("body")[0].innerHTML += "<div></div>"
+    }
+
+    window.onload = function () {
+        var speedH = 1, speedV = 1, hor = 0, ver = 0
+        var divs = document.getElementsByTagName("div")
+
+        setup()
+        animate()
+
+        function setup() {
+            for (var i = 0; i < divs.length; i++) {
+                divs[i].style.backgroundColor = "rgb(" + i * 12 + "," + i * 25 + "," + Math.floor(Math.random() * 255) + ")"
+                divs[i].style.border = "1px solid rgb(" + i * 12 + "," + i * 25 + "," + Math.floor(Math.random() * 255) + ")"
+                //divs[i].style.borderRadius = "100%"
+                divs[i].style.height = 5 * i + 1 + "vh"
+                divs[i].style.width = 3 * i + 1 + "vh"
+                divs[i].style.top = i * 20 + "px"
+                divs[i].style.left = i * 10 + "px"
+            }
+
+        }
+        function animate() {
+            for (var i = 0; i < divs.length; i++) {
+                hor = parseInt(divs[i].style.left)
+                ver = parseInt(divs[i].style.top)
+                hor += speedH * (7 - Math.random() * i / 5)
+                ver += speedV * Math.random() * (i / 3)
+
+                console.log(hor)
+
+                divs[i].style.top = ver + "px"
+                divs[i].style.left = hor + "px"
+
+                if (hor > window.innerWidth || hor < 0) { speedH = -speedH }
+                if (ver > window.innerHeight || ver < 0) { speedV = -speedV }
+            }
+
+            requestAnimationFrame(animate)
+        }
+
+
+
+    }
+
+</script>
+
+</html>
